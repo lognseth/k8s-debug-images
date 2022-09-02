@@ -1,0 +1,22 @@
+name: CI to Docker hub 
+on:
+  push:
+    branches:
+      - 'main'
+      
+  steps:
+      - name: Login to DockerHub
+        uses: docker/login-action@v1 
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PAT }}
+      - name: Build and push network debugger
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          context: ./Network-Debugger
+          file: ./Dockerfile
+          push: true
+          tags: lognseth/network-debugger:latest
+      - name: Image digest
+        run: echo ${{ steps.docker_build.outputs.digest }}
