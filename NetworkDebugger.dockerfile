@@ -7,6 +7,6 @@ RUN apk add --update iproute2 bind-tools curl openssl nmap nmap-scripts tcpdump 
 RUN apk add --update docker openrc
 RUN rc-update add docker boot
 RUN apk add gcc musl-dev python3-dev libffi-dev openssl-dev cargo make
-RUN pip install --upgrade pip
-RUN pip install azure-cli
+RUN pip3 install --upgrade pip
+RUN pip3 install azure-cli
 CMD ["sh"]
